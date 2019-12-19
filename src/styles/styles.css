@@ -1,0 +1,7 @@
+a {
+    text-decoration: underline dotted;
+}
+
+a:hover {
+    text-decoration: underline solid;
+}
