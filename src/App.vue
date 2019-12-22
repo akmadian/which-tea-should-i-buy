@@ -1,48 +1,35 @@
 <template>
     <div id="app">
         <Title/>
-        <Filtering :data="data"/>
-        <RawTable :data="data"/>
-        <!--<ysTable :data="data"/>-->
+        <IntroView 
+            InputSize="large"
+            v-on:productsfiltered="setToTableView()"
+        />
+        <div id="tablecontainer">
+
+        </div>
     </div>
 </template>
 
 <script>
-/* eslint-disable no-console */
-//import ysTable from './components/ysTable'
-import Filtering from './components/Filtering'
 import Title from './components/Title'
-import RawTable from './components/RawTable'
+import IntroView from './views/IntroView'
+import TableView from './views/TableView'
+
+import Vue from 'vue'
 
 export default {
     name: 'app',
     components: {
-  //      ysTable,
-        Filtering,
         Title,
-        RawTable
-    },
-    data() {
-        return {
-            data: [],
-            page: 1,
-            loading: false
-        }
-    },
-    mounted() {
-        this.getData()
+        IntroView
     },
     methods: {
-        getData: async function() {
-            const url = `https://yunnansourcing.com/products.json?limit=250&page=1`
-            const res = await fetch(url)
-            const json = await res.json()
-            this.data = json.products.filter(product => !product.tags.includes('Teapot') && 
-                                                        !product.tags.includes('Cups') &&
-                                                        !product.tags.includes('Gaiwan') &&
-                                                        !product.tags.includes('gaiwan') &&
-                                                        !product.tags.includes('Strainer') &&
-                                                        !product.tags.includes('Tea Table'))
+        setToTableView: function() {
+            const ComponentInstance = new Vue({
+                ...TableView
+            })
+            ComponentInstance.$mount('#tablecontainer');
         }
     }
 }

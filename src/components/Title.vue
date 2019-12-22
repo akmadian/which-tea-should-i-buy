@@ -15,6 +15,7 @@ export default {
 	background: url('../assets/titleback.jpg') no-repeat center center;
 	background-size: 100% auto;
 	color: #fff;
+    color: black;
     text-align: center;
 	/* -webkit-background-clip clips the background of the element to the text */
 	-webkit-text-fill-color: transparent; /* overrides the white text color in webkit browsers */
@@ -23,6 +24,7 @@ export default {
 }
 
 h1 {
+    color: black;
     text-transform: uppercase;
     font-family: 'Dosis', sans-serif;
     font-size: 6vw;

@@ -38,7 +38,7 @@
                             :color="available ? 'green' : 'red'"
                             :key="available"
                         >
-                            {{available}}
+                            {{available ? 'Yes' : 'No'}}
                         </a-tag>
                     </span>
                     <!--

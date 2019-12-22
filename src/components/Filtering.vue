@@ -145,7 +145,6 @@
 </template>
 <script>
 export default {
-    props: ['data'],
     methods: {
         typeColor: function(type) {
             switch (type) {
