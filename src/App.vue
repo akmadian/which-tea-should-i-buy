@@ -4,6 +4,13 @@
         <IntroView 
             InputSize="large"
             v-on:productsfiltered="setToTableView()"
+            @introFormSubmitted="formSubmitted = true"
+        />
+        <a-spin
+            v-if="formSubmitted"
+            :tip="store.state.loadingMessage"
+            :indicator="customSpinnerIndicator"
+            size="large"
         />
         <div id="tablecontainer">
 
@@ -15,6 +22,7 @@
 import Title from './components/Title'
 import IntroView from './views/IntroView'
 import TableView from './views/TableView'
+import { store } from './store/store'
 
 import Vue from 'vue'
 
@@ -23,6 +31,13 @@ export default {
     components: {
         Title,
         IntroView
+    },
+    data() {
+        return {
+            store: store,
+            customSpinnerIndicator: <a-icon type="loading" spin/>,
+            formSubmitted: false
+        }
     },
     methods: {
         setToTableView: function() {

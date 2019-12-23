@@ -3,8 +3,8 @@
     <div id="introview">
         <a-form :form="form" @submit="handleIntroSubmit">
             <a-row>
-                <a-col :span="8" :offset="3">
-                    <a-form-item label="Vendor" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }">
+                <a-col :span="8" :offset="4">
+                    <a-form-item label="Vendor" :label-col="formItemLayout.labelCol" :wrapper-col="formItemLayout.wrapperCol">
                         <a-select
                             :size="InputSize" 
                             ref="IntroVendor"
@@ -16,10 +16,14 @@
                                 }
                             ]"
                         >
-                            <a-select-option value="ys.com">yunnansourcing.com</a-select-option>
+                            <a-select-option value="yunnansourcing.com">Yunnan Sourcing</a-select-option>
+                            <a-select-option value="yunnansourcing.us">Yunnan Sourcing US</a-select-option>
+                            <a-select-option value="crimsonlotustea.com">Crimson Lotus</a-select-option>
+                            <a-select-option value="what-cha.com">What-Cha</a-select-option>
+                            <a-select-option value="taiwanoolongs.com">Taiwan Sourcing</a-select-option>
                         </a-select>
                     </a-form-item>
-                    <a-form-item label="Currency" :label-col="{ span: 3 }" :wrapper-col="{ span: 6 }">
+                    <a-form-item label="Currency" :label-col="formItemLayout.labelCol" :wrapper-col="formItemLayout.wrapperCol">
                         <a-select
                             style="width: 120px" 
                             :size="InputSize"
@@ -37,9 +41,7 @@
                             <a-select-option value="CNY">CNY</a-select-option>
                         </a-select>
                     </a-form-item>
-                </a-col>
-                <a-col :span="8" :offset="2">
-                    <a-form-item label="Filter Types" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }">
+                    <a-form-item label="Filter Types" :label-col="formItemLayout.labelCol" :wrapper-col="formItemLayout.wrapperCol">
                         <a-select
                             mode="multiple"
                             placeholder="Filter Types"
@@ -63,9 +65,39 @@
                             </a-select-option>
                         </a-select>
                     </a-form-item>
+                    <a-form-item :label-col="formTailLayout.labelCol" :wrapper-col="formTailLayout.wrapperCol">
+                        <a-checkbox>
+                            Must Be In Stock
+                        </a-checkbox>
+                    </a-form-item>
+                </a-col>
+                <a-col :span="8">
+                    <a-form-item label="Form Factor" :label-col="formItemLayout.labelCol" :wrapper-col="formItemLayout.wrapperCol">
+                        <a-select mode="multiple" style="width: 100%">
+                            <a-select-option value="loose">Loose</a-select-option>
+                            <a-select-option value="cake">Cake</a-select-option>
+                            <a-select-option value="brick">Brick</a-select-option>
+                            <a-select-option value="dragonballs">Dragon Balls</a-select-option>
+                        </a-select>
+                    </a-form-item>
+                    <a-form-item label="Price Range" :label-col="formItemLayout.labelCol" :wrapper-col="formItemLayout.wrapperCol">
+                        <a-input-number 
+                            :formatter="value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                            :parser="value => value.replace(/\$\s?|(,*)/g, '')"
+                            :min="0"
+                            :defaultvalue="0"
+                        />
+                        -
+                        <a-input-number 
+                            :formatter="value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                            :parser="value => value.replace(/\$\s?|(,*)/g, '')"
+                            :min="0"
+                            :defaultvalue="0"
+                        />
+                    </a-form-item>
                 </a-col>
             </a-row>
-            <a-form-item>
+            <a-form-item :label-col="formTailLayout.labelCol" :wrapper-col="formTailLayout.wrapperCol">
                 <a-button 
                     :size="InputSize"
                     type="primary"
@@ -94,12 +126,21 @@ export default {
         return {
             formLayout: 'horizontal',
             form: this.$form.createForm(this, { name: 'IntroForm' }),
-            types: ['Black', 'White', 'Yellow', 'Shou', 'Sheng', 'Green', 'Oolong']
+            types: ['Black', 'White', 'Yellow', 'Shou', 'Sheng', 'Green', 'Oolong'],
+            formItemLayout: {
+                labelCol: { span: 4 },
+                wrapperCol: { span: 10 }
+            },
+            formTailLayout: {
+                labelCol: { span: 4 },
+                wrapperCol: { span: 8, offset: 4 }
+            }
         }
     },
     methods: {
         handleIntroSubmit: function(e) {
             e.preventDefault()
+            this.$emit('introFormSubitted')
             const values = this.form.getFieldsValue()
             console.log(values)
             GetProducts(values.vendor, 

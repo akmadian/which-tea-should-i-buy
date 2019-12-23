@@ -53,7 +53,7 @@
             </a-col>
             <a-col :span="8">
                 <b>Vendor Description</b>
-                <div>{{item.body_html}}</div>
+                <div v-html="item.body_html"></div>
             </a-col>
         </a-row>
     </div>

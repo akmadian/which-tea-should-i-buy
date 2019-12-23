@@ -20,7 +20,8 @@ export const store = new Vuex.Store({
         selectedCurrency: {
             ISC_CODE: "USD",
             symbol: "$"
-        }
+        },
+        loadingMessage: 'Loading...'
     },
     computed: {
         filteredProducts: (state) => state.filteredProducts

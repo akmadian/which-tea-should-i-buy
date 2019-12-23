@@ -16,7 +16,7 @@ function AddStandardizedType(products) {
 
 
 function RemoveTeaWares(products) {
-    const flags = ['pot', 'clay', 'gaiwan', 'table', 'ware', 'cup', 'glass', 'strainer']
+    const flags = ['pot', 'clay', 'gaiwan', 'table', 'ware', 'cup', 'glass', 'strainer', 'box']
     return products.filter((product) => {
         return ContainsFlag(product, flags)
     })

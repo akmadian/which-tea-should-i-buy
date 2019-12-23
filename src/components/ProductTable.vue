@@ -1,5 +1,6 @@
 <template>
-    <a-table 
+    <a-table
+        ref="productTable"
         :columns="columns" 
         :dataSource="store.getters.filteredProducts" 
         :rowKey="record => record.id"
@@ -44,7 +45,9 @@
             <a-tag v-for="tag in tags" :key="tag">{{tag}}</a-tag>
         </span>
         <span slot="buyit">
-            url
+            <a-button type="primary">
+                Buy It!
+            </a-button>
             <!-- slot-scope="handle"
             <form :action="genItemUrl(handle)" target="_blank">
                 <a-button type="primary" htmlType="submit" size="small">
@@ -127,7 +130,7 @@ export default {
         TypeToColor_: TypeToColor,
         ExtractType_: ExtractType,
         ExtractHarvest_: ExtractHarvest
-    },
+    }
 };
 </script>
 <style scoped>
