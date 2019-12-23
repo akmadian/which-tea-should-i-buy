@@ -49,7 +49,7 @@
                             </a-button>
                         </form>
                     </span>-->
-                </a-table>
+                </a-table><br>
             </a-col>
             <a-col :span="8">
                 <b>Vendor Description</b>

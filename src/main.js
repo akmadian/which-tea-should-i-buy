@@ -1,21 +1,19 @@
 import Vue from 'vue'
+import Antd from 'ant-design-vue'
 import App from './App.vue'
 import 'ant-design-vue/dist/antd.css'
-import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/antd'
-import Buefy from 'buefy'
+import { Carousel } from 'buefy'
 import 'buefy/dist/buefy.css'
 import './styles/styles.css'
+import './utils/other/extensions'
 
 import Vuex from 'vuex'
-import storePlugin from './store/storePlugin'
 
 Vue.config.productionTip = false
 
 Vue.use(Antd)
-Vue.use(Buefy)
+Vue.use(Carousel)
 Vue.use(Vuex)
-Vue.use(storePlugin)
 
 
 new Vue({

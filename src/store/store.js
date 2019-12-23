@@ -8,19 +8,30 @@ export const store = new Vuex.Store({
         products: {},
         filteredProducts: {},
         filterParameters: {
-            lowPPG: undefined,
-            highPPG: undefined,
-            selectedCurrency: '',
+            ppg: {
+                min: 0,
+                max: Infinity
+            },
+            price: {
+                min: 0,
+                max: Infinity
+            },
+            years: {
+                min: 1900,
+                max: new Date().getFullYear()
+            },
             mustHaveSample: false,
+            mustBeInStock: false,
             mustBeOrganic: false,
-            years: [],
+            includeTeaware: false,
             types: [],
-            tags: [],
+            formFactors: []
         },
         selectedCurrency: {
             ISC_CODE: "USD",
             symbol: "$"
         },
+        loading: false,
         loadingMessage: 'Loading...'
     },
     computed: {
@@ -32,6 +43,16 @@ export const store = new Vuex.Store({
         },
         updatefilteredproducts(state, newProducts) {
             state.filteredProducts = newProducts
+        },
+        updateFilterParams(state, newParams) {
+            state.filterParameters = newParams
+        },
+        updateLoadingMessage(state, newMessage) {
+            state.loadingMessage = newMessage
+        },
+        updateLoading(state, newVal) {
+            console.log('Upate loading triggered: ', newVal)
+            state.loading = newVal
         }
     },
     getters: {

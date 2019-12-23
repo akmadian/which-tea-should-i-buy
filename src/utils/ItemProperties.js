@@ -5,30 +5,51 @@ export const ItemProperties = {
         }
         else return '$' + `${Math.min(...val)}-${Math.max(...val)}`
     },
-    ProductHarvest: function(product) {
-        if (product.season === null) {
+    ProductHarvest: function() {
+        // param: product
+        return null
+        /*
+        if (product.harvest.season === null) {
             return product.year
         } 
         else {
             return `${product.season} ${product.year}`
-        }
+        }*/
     },
     minMaxPrice: function(product) {
-        var prices = product.variants.map(variant => parseInt(variant.price))
-        return [Math.min(...prices).toFixed(2), Math.max(...prices).toFixed(2)]
+        try {
+            var prices = product.variants.map(variant => parseInt(variant.price))
+            return [Math.min(...prices).toFixed(2), Math.max(...prices).toFixed(2)]
+        } catch (err) {
+            console.log("Odd Product: ", product)
+            console.log(err)
+            return [0, 500]
+        }
     },
     minMaxWeight: function(product) {
-        var weights = product.variants.map(variant => parseInt(variant.grams))
-        return [Math.min(...weights), Math.max(...weights)]
+        try {
+            var weights = product.variants.map(variant => parseInt(variant.grams))
+            return [Math.min(...weights), Math.max(...weights)]
+        } catch (err) {
+            console.log("Odd Product: ", product)
+            console.log(err)
+            return [0, 500]
+        }
     },
     minMaxPPG: function(product) {
-        const mmprice = this.minMaxPrice(product)
-        const mmweight = this.minMaxWeight(product)
-        const out = [
-            mmprice[0] / mmweight[0],
-            mmprice[1] / mmweight[1]
-        ]
-        return out
+        try {
+            const mmprice = this.minMaxPrice(product)
+            const mmweight = this.minMaxWeight(product)
+            const out = [
+                mmprice[0] / mmweight[0],
+                mmprice[1] / mmweight[1]
+            ]
+            return out
+        } catch (err) {
+            console.log("Odd Product: ", product)
+            console.log(err)
+            return [0, 1]
+        }
     },
     genItemUrl: function(product) {
         return `https://yunnansourcing.com/products/${product.handle}`

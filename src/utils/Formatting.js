@@ -4,10 +4,7 @@ export const Formatting = {
             ? `${unitCurrency}${Math.min(...minMax).toFixed(2)}/g`
             : `${unitCurrency}${Math.min(...minMax).toFixed(2)}/g - ${unitCurrency}${Math.max(...minMax).toFixed(2)}/g`
     },
-    /*weight: function(minMax) {
-
-    },*/
-    price: function(minMax, unitCurrency) {
+    Price: function(minMax, unitCurrency) {
         const out = minMax[0] === minMax[1]
                     ? `${unitCurrency}${minMax[0].toFixed(2)}`
                     : `${unitCurrency}${Math.min(...minMax).toFixed(2)} - ${unitCurrency}${Math.max(...minMax).toFixed(2)}`
@@ -17,10 +14,15 @@ export const Formatting = {
             ? 'unavailable'
             : out
     },
-    weight: function(options) {
+    Weight: function(options) {
         var weights = options.filter(option => {
             return option.name === "Weight" || option.name === "Quantity"
         })[0].values
         return weights ? weights.join(', ') : 'weight'
+    },
+    Harvest:  function(harvestObj) {
+        const formatSeason = harvestObj.season ? harvestObj.season : ''
+        const formatYear = harvestObj.year ? harvestObj.year : ''
+        return `${formatSeason} ${formatYear}`
     }
 }
