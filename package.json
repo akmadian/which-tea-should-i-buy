@@ -12,7 +12,7 @@
     "buefy": "^0.8.8",
     "core-js": "^3.4.3",
     "eslint-config-eslint": "^5.0.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
